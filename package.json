@@ -1,0 +1,25 @@
+{
+  "name": "unisonht-yamaha-receiver",
+  "version": "1.0.0",
+  "description": "UnisonHT Plugin for Yamaha Receivers",
+  "main": "index.js",
+  "scripts": {
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/joeferner/unisonht-yamaha-receiver.git"
+  },
+  "keywords": [
+    "unisonht",
+    "tivo"
+  ],
+  "author": "Joe Ferner <joe@fernsroth.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/joeferner/unisonht-yamaha-receiver/issues"
+  },
+  "homepage": "https://github.com/joeferner/unisonht-yamaha-receiver#readme",
+  "dependencies": {
+    "unisonht": "^1.0.0"
+  }
+}
