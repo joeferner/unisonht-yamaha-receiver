@@ -3,8 +3,7 @@
   "version": "1.0.0",
   "description": "UnisonHT Plugin for Yamaha Receivers",
   "main": "index.js",
-  "scripts": {
-  },
+  "scripts": {},
   "repository": {
     "type": "git",
     "url": "git+https://github.com/joeferner/unisonht-yamaha-receiver.git"
@@ -20,6 +19,9 @@
   },
   "homepage": "https://github.com/joeferner/unisonht-yamaha-receiver#readme",
   "dependencies": {
-    "unisonht": "^1.0.0"
+    "unisonht": "^1.0.0",
+    "xmldoc": "^0.5.1",
+    "xmldom": "^0.1.22",
+    "xpath": "0.0.23"
   }
 }

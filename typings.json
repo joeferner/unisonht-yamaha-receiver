@@ -2,6 +2,7 @@
   "name": "unisonht-yamaha-receiver",
   "dependencies": {},
   "globalDependencies": {
-    "node": "registry:env/node#6.0.0+20161105011511"
+    "xmldom": "registry:dt/xmldom#0.1.22+20160319053438",
+    "xpath": "registry:dt/xpath#0.0.7+20160316155526"
   }
 }
