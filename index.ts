@@ -1,5 +1,3 @@
-/// <reference path="./index.d.ts" />
-
 import {UnisonHTDevice} from "unisonht";
 import * as xpath from "xpath";
 import * as xmldom from "xmldom";
@@ -134,6 +132,7 @@ class YamahaReceiver implements UnisonHTDevice {
         });
         res.on('end', () => {
           try {
+            log.debug(`responseData ${responseData}`);
             resolve(new xmldom.DOMParser().parseFromString(responseData));
           } catch (err) {
             reject(err);

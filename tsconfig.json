@@ -7,6 +7,8 @@
   },
   "files": [
     "index.ts",
-    "test.ts"
+    "test.ts",
+    "typings/index.d.ts",
+    "xml.d.ts"
   ]
 }

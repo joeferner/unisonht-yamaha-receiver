@@ -20,7 +20,6 @@
   "homepage": "https://github.com/joeferner/unisonht-yamaha-receiver#readme",
   "dependencies": {
     "unisonht": "^1.0.0",
-    "xmldoc": "^0.5.1",
     "xmldom": "^0.1.22",
     "xpath": "0.0.23"
   }
