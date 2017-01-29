@@ -22,7 +22,7 @@ class YamahaReceiver implements UnisonHTDevice {
     if (newInput) {
       input = newInput;
     }
-    return this.changeInputOfZone(YamahaReceiver.Zone.MAIN, input);
+    return this.changeInputOfZone(YamahaReceiver.Zone.MAIN, input).then(()=>{});
   }
 
   private changeInputOfZone(zone: string, input: string): Promise<Document> {
@@ -44,11 +44,11 @@ class YamahaReceiver implements UnisonHTDevice {
   }
 
   ensureOn(): Promise<void> {
-    return this.putXml(YamahaReceiver.Zone.MAIN, "<Power_Control><Power>On</Power></Power_Control>");
+    return this.putXml(YamahaReceiver.Zone.MAIN, "<Power_Control><Power>On</Power></Power_Control>").then(()=>{});
   }
 
   ensureOff(): Promise<void> {
-    return this.putXml(YamahaReceiver.Zone.MAIN, "<Power_Control><Power>Standby</Power></Power_Control>");
+    return this.putXml(YamahaReceiver.Zone.MAIN, "<Power_Control><Power>Standby</Power></Power_Control>").then(()=>{});
   }
 
   private toggleMute(zone: string): Promise<void> {
@@ -67,21 +67,21 @@ class YamahaReceiver implements UnisonHTDevice {
   }
 
   private muteOff(zone: string): Promise<void> {
-    return this.putXml(zone, '<Volume><Mute>Off</Mute></Volume>');
+    return this.putXml(zone, '<Volume><Mute>Off</Mute></Volume>').then(()=>{});
   }
 
   private muteOn(zone: string): Promise<void> {
-    return this.putXml(zone, '<Volume><Mute>On</Mute></Volume>');
+    return this.putXml(zone, '<Volume><Mute>On</Mute></Volume>').then(()=>{});
   }
 
   private changeVolume(zone: string, delta: number): Promise<void> {
     const direction = delta > 0 ? "Up" : "Down";
     const amount = Math.abs(delta) == 0.5 ? '' : ` ${Math.abs(delta)} dB `;
     const xml = `<Volume><Lvl><Val>${direction}${amount}</Val><Exp></Exp><Unit></Unit></Lvl></Volume>`;
-    return this.putXml(zone, xml);
+    return this.putXml(zone, xml).then(()=>{});
   }
 
-  private isStatusParamOn(zone: string, param: string): Promise<string> {
+  private isStatusParamOn(zone: string, param: string): Promise<boolean> {
     return this.getStatusString(zone, param)
       .then((statusString)=> {
         return statusString.toUpperCase() == 'ON';
