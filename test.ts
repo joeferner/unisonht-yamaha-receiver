@@ -1,12 +1,11 @@
-const repl = require('repl');
-const YamahaReceiver = require('.').default;
-var yamahaReceiver = new YamahaReceiver({
+import {UnisonHT} from "unisonht";
+import {YamahaReceiver} from ".";
+
+const unisonht = new UnisonHT();
+
+unisonht.use(new YamahaReceiver('receiver', {
   address: '192.168.0.165',
-  inputs: {
+  inputs: {}
+}));
 
-  }
-});
-
-console.log('yamahaReceiver exported');
-const r = repl.start('> ');
-r.context.yamahaReceiver = yamahaReceiver;
+unisonht.listen(3000);
