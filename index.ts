@@ -3,6 +3,7 @@ import * as express from "express";
 import {YamahaReceiverClient} from "./YamahaReceiverClient";
 import {MockYamahaReceiverClient} from "./MockYamahaReceiverClient";
 import {YamahaReceiverClientImpl} from "./YamahaReceiverClientImpl";
+import * as Boom from "boom";
 
 export class YamahaReceiver extends Device {
   private client: YamahaReceiverClient;
@@ -37,7 +38,10 @@ export class YamahaReceiver extends Device {
   }
 
   protected handleButtonPress(req: express.Request, res: UnisonHTResponse, next: express.NextFunction): void {
-    const buttonName = req.query.buttonName;
+    const buttonName = req.query.button;
+    if (!buttonName) {
+      return next(Boom.badRequest('missing "button" query parameter'));
+    }
     res.promiseNoContent(this.client.buttonPress(buttonName));
   }
 
