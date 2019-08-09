@@ -1,5 +1,5 @@
 {
-  "name": "unisonht-yamaha-receiver",
+  "name": "@unisonht/yamaha-receiver",
   "version": "0.0.1",
   "description": "UnisonHT Plugin for Yamaha Receivers",
   "main": "dist/index.js",
@@ -29,7 +29,7 @@
     "xpath": "0.0.27"
   },
   "peerDependencies": {
-    "unisonht": "0.0.x"
+    "@unisonht/unisonht": "0.0.x"
   },
   "devDependencies": {
     "@types/debug": "^4.1.5",

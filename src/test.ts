@@ -1,4 +1,4 @@
-import {UnisonHT} from "unisonht";
+import {UnisonHT} from "@unisonht/unisonht";
 import {YamahaReceiver} from ".";
 
 const unisonht = new UnisonHT({});

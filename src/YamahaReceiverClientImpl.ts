@@ -3,7 +3,7 @@ import * as xpath from "xpath";
 import * as xmldom from "xmldom";
 import Debug from 'debug';
 import {YamahaReceiverInput, YamahaReceiverZone} from "./YamahaReceiver";
-import {ButtonNotFoundError, StandardKey} from "unisonht";
+import {ButtonNotFoundError, StandardKey} from "@unisonht/unisonht";
 import axios from "axios";
 
 const debug = Debug('YamahaReceiver:ClientImpl');

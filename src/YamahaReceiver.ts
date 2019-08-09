@@ -1,4 +1,4 @@
-import {NextFunction, RouteHandlerRequest, RouteHandlerResponse, UnisonHT, UnisonHTDevice} from "unisonht";
+import {NextFunction, RouteHandlerRequest, RouteHandlerResponse, UnisonHT, UnisonHTDevice} from "@unisonht/unisonht";
 import {YamahaReceiverClient} from "./YamahaReceiverClient";
 import {YamahaReceiverClientMock} from "./YamahaReceiverClientMock";
 import {YamahaReceiverClientImpl} from "./YamahaReceiverClientImpl";
