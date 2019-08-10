@@ -1,4 +1,5 @@
 import { YamahaReceiverInput } from './YamahaReceiver';
+import { YamahaReceiverButton } from './YamahaReceiverButton';
 
 export interface YamahaReceiverClient {
   changeInput(input: YamahaReceiverInput): Promise<void>;
@@ -7,5 +8,5 @@ export interface YamahaReceiverClient {
 
   off(): Promise<void>;
 
-  buttonPress(buttonName: string): Promise<void>;
+  buttonPress(button: YamahaReceiverButton): Promise<void>;
 }

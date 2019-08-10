@@ -3,8 +3,9 @@ import * as xpath from 'xpath';
 import * as xmldom from 'xmldom';
 import Debug from 'debug';
 import { YamahaReceiverInput, YamahaReceiverZone } from './YamahaReceiver';
-import { ButtonNotFoundError, StandardKey } from '@unisonht/unisonht';
+import { ButtonNotFoundError } from '@unisonht/unisonht';
 import axios from 'axios';
+import { YamahaReceiverButton } from './YamahaReceiverButton';
 
 const debug = Debug('YamahaReceiver:ClientImpl');
 
@@ -27,19 +28,19 @@ export class YamahaReceiverClientImpl implements YamahaReceiverClient {
     await this.putXml(YamahaReceiverZone.MAIN, '<Power_Control><Power>Standby</Power></Power_Control>');
   }
 
-  public async buttonPress(buttonName: string): Promise<void> {
-    switch (buttonName) {
-      case StandardKey.MUTE:
+  public async buttonPress(button: YamahaReceiverButton): Promise<void> {
+    switch (button) {
+      case YamahaReceiverButton.MUTE:
         await this.toggleMute(YamahaReceiverZone.MAIN);
         return;
-      case StandardKey.VOLUME_UP:
+      case YamahaReceiverButton.VOLUME_UP:
         await this.changeVolume(YamahaReceiverZone.MAIN, 0.5);
         return;
-      case StandardKey.VOLUME_DOWN:
+      case YamahaReceiverButton.VOLUME_DOWN:
         await this.changeVolume(YamahaReceiverZone.MAIN, -0.5);
         return;
       default:
-        throw new ButtonNotFoundError(buttonName);
+        throw new ButtonNotFoundError(button);
     }
   }
 

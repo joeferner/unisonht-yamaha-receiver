@@ -1,6 +1,7 @@
 import { YamahaReceiverClient } from './YamahaReceiverClient';
 import { YamahaReceiverInput } from './YamahaReceiver';
 import Debug from 'debug';
+import { YamahaReceiverButton } from './YamahaReceiverButton';
 
 const debug = Debug('YamahaReceiver:ClientMock');
 
@@ -17,7 +18,7 @@ export class YamahaReceiverClientMock implements YamahaReceiverClient {
     debug('off');
   }
 
-  public async buttonPress(buttonName: string): Promise<void> {
+  public async buttonPress(buttonName: YamahaReceiverButton): Promise<void> {
     debug(`buttonPress ${buttonName}`);
   }
 }
