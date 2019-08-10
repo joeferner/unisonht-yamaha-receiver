@@ -11,27 +11,11 @@ import { YamahaReceiverClient } from './YamahaReceiverClient';
 import { YamahaReceiverClientMock } from './YamahaReceiverClientMock';
 import { YamahaReceiverClientImpl } from './YamahaReceiverClientImpl';
 import { YamahaReceiverButton } from './YamahaReceiverButton';
+import { YamahaReceiverInput, YamahaReceiverStatus, YamahaReceiverZone } from './YamahaReceiverStatus';
 
 export interface YamahaReceiverOptions {
   useMockClient?: boolean;
   address: string;
-}
-
-export interface YamahaReceiverStatus {
-  [key: string]: any; // TODO fill in
-}
-
-export enum YamahaReceiverZone {
-  MAIN = 'Main_Zone',
-}
-
-export enum YamahaReceiverInput {
-  HDMI1 = 'HDMI1',
-  HDMI2 = 'HDMI2',
-  HDMI3 = 'HDMI3',
-  HDMI4 = 'HDMI4',
-  HDMI5 = 'HDMI5',
-  AV1 = 'AV1',
 }
 
 export class YamahaReceiver implements UnisonHTDevice {
@@ -51,6 +35,27 @@ export class YamahaReceiver implements UnisonHTDevice {
 
   public getSupportedButtons(): SupportedButtons {
     return {
+      [StandardButton.POWER_ON]: {
+        name: 'Power On',
+        handleButtonPress: async (button, request, response, next) => {
+          await this.client.on();
+          response.send();
+        },
+      },
+      [StandardButton.POWER_OFF]: {
+        name: 'Power Off',
+        handleButtonPress: async (button, request, response, next) => {
+          await this.client.off();
+          response.send();
+        },
+      },
+      [StandardButton.POWER_TOGGLE]: {
+        name: 'Power On',
+        handleButtonPress: async (button, request, response, next) => {
+          await this.client.powerToggle();
+          response.send();
+        },
+      },
       [StandardButton.MUTE]: {
         name: 'Mute',
         handleButtonPress: this.createButtonPressHandler(YamahaReceiverButton.MUTE),
@@ -63,6 +68,54 @@ export class YamahaReceiver implements UnisonHTDevice {
         name: 'Volume Down',
         handleButtonPress: this.createButtonPressHandler(YamahaReceiverButton.VOLUME_DOWN),
       },
+      [StandardButton.INPUT_HDMI1]: {
+        name: 'Input: HDMI1',
+        handleButtonPress: this.createInputButtonPressHandler(YamahaReceiverInput.HDMI1),
+      },
+      [StandardButton.INPUT_HDMI2]: {
+        name: 'Input: HDMI2',
+        handleButtonPress: this.createInputButtonPressHandler(YamahaReceiverInput.HDMI2),
+      },
+      [StandardButton.INPUT_HDMI3]: {
+        name: 'Input: HDMI3',
+        handleButtonPress: this.createInputButtonPressHandler(YamahaReceiverInput.HDMI3),
+      },
+      [StandardButton.INPUT_HDMI4]: {
+        name: 'Input: HDMI4',
+        handleButtonPress: this.createInputButtonPressHandler(YamahaReceiverInput.HDMI4),
+      },
+      [StandardButton.INPUT_HDMI5]: {
+        name: 'Input: HDMI5',
+        handleButtonPress: this.createInputButtonPressHandler(YamahaReceiverInput.HDMI5),
+      },
+      [StandardButton.INPUT_AV1]: {
+        name: 'Input: AV1',
+        handleButtonPress: this.createInputButtonPressHandler(YamahaReceiverInput.AV1),
+      },
+      [StandardButton.INPUT_AV2]: {
+        name: 'Input: AV2',
+        handleButtonPress: this.createInputButtonPressHandler(YamahaReceiverInput.AV2),
+      },
+      [StandardButton.INPUT_AV3]: {
+        name: 'Input: AV3',
+        handleButtonPress: this.createInputButtonPressHandler(YamahaReceiverInput.AV3),
+      },
+      [StandardButton.INPUT_AV4]: {
+        name: 'Input: AV4',
+        handleButtonPress: this.createInputButtonPressHandler(YamahaReceiverInput.AV4),
+      },
+    };
+  }
+
+  private createInputButtonPressHandler(input: YamahaReceiverInput) {
+    return async (
+      btn: string,
+      request: RouteHandlerRequest,
+      response: RouteHandlerResponse,
+      next: NextFunction,
+    ): Promise<void> => {
+      await this.client.changeInput(input);
+      response.send();
     };
   }
 
@@ -74,11 +127,12 @@ export class YamahaReceiver implements UnisonHTDevice {
       next: NextFunction,
     ): Promise<void> => {
       await this.client.buttonPress(button);
+      response.send();
     };
   }
 
   public async getStatus(): Promise<YamahaReceiverStatus> {
-    return {};
+    return await this.client.getStatus(YamahaReceiverZone.MAIN);
   }
 
   public async initialize(unisonht: UnisonHT): Promise<void> {

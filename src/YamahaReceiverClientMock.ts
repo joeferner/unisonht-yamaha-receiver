@@ -1,7 +1,12 @@
 import { YamahaReceiverClient } from './YamahaReceiverClient';
-import { YamahaReceiverInput } from './YamahaReceiver';
 import Debug from 'debug';
 import { YamahaReceiverButton } from './YamahaReceiverButton';
+import {
+  YamahaReceiverInput,
+  YamahaReceiverPower,
+  YamahaReceiverStatus,
+  YamahaReceiverZone,
+} from './YamahaReceiverStatus';
 
 const debug = Debug('YamahaReceiver:ClientMock');
 
@@ -18,7 +23,20 @@ export class YamahaReceiverClientMock implements YamahaReceiverClient {
     debug('off');
   }
 
+  public async powerToggle(): Promise<void> {
+    debug('power toggle');
+  }
+
   public async buttonPress(buttonName: YamahaReceiverButton): Promise<void> {
     debug(`buttonPress ${buttonName}`);
+  }
+
+  public async getStatus(zone: YamahaReceiverZone): Promise<YamahaReceiverStatus> {
+    return {
+      input: YamahaReceiverInput.HDMI1,
+      mute: false,
+      volume: -1,
+      power: YamahaReceiverPower.STANDBY,
+    };
   }
 }
