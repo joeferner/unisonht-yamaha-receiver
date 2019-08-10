@@ -2,8 +2,8 @@ import {
   NextFunction,
   RouteHandlerRequest,
   RouteHandlerResponse,
-  StandardKey,
-  SupportedKeys,
+  StandardButton,
+  SupportedButtons,
   UnisonHT,
   UnisonHTDevice,
 } from '@unisonht/unisonht';
@@ -49,26 +49,26 @@ export class YamahaReceiver implements UnisonHTDevice {
     return this.deviceName;
   }
 
-  public getSupportedKeys(): SupportedKeys {
+  public getSupportedButtons(): SupportedButtons {
     return {
-      [StandardKey.MUTE]: {
+      [StandardButton.MUTE]: {
         name: 'Mute',
-        handleKeyPress: this.createKeyPressHandler(YamahaReceiverButton.MUTE),
+        handleButtonPress: this.createButtonPressHandler(YamahaReceiverButton.MUTE),
       },
-      [StandardKey.VOLUME_UP]: {
+      [StandardButton.VOLUME_UP]: {
         name: 'Volume Up',
-        handleKeyPress: this.createKeyPressHandler(YamahaReceiverButton.VOLUME_UP),
+        handleButtonPress: this.createButtonPressHandler(YamahaReceiverButton.VOLUME_UP),
       },
-      [StandardKey.VOLUME_DOWN]: {
+      [StandardButton.VOLUME_DOWN]: {
         name: 'Volume Down',
-        handleKeyPress: this.createKeyPressHandler(YamahaReceiverButton.VOLUME_DOWN),
+        handleButtonPress: this.createButtonPressHandler(YamahaReceiverButton.VOLUME_DOWN),
       },
     };
   }
 
-  private createKeyPressHandler(button: YamahaReceiverButton) {
+  private createButtonPressHandler(button: YamahaReceiverButton) {
     return async (
-      key: string,
+      btn: string,
       request: RouteHandlerRequest,
       response: RouteHandlerResponse,
       next: NextFunction,
