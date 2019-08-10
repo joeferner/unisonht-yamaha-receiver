@@ -1,7 +1,8 @@
-import { UnisonHT } from '@unisonht/unisonht';
+import { UnisonHT, WebApi } from '@unisonht/unisonht';
 import { YamahaReceiver } from '.';
 
 const unisonht = new UnisonHT({});
+unisonht.use(new WebApi({ port: 3000 }));
 
 unisonht.use(
   new YamahaReceiver('receiver', {
@@ -9,4 +10,4 @@ unisonht.use(
   }),
 );
 
-unisonht.listen(3000);
+unisonht.start();
