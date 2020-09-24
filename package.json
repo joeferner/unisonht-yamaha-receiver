@@ -1,6 +1,6 @@
 {
   "name": "@unisonht/yamaha-receiver",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "UnisonHT Plugin for Yamaha Receivers",
   "main": "dist/index.js",
   "types": "src/index.ts",

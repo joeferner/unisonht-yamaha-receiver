@@ -6,14 +6,14 @@ const unisonht = new UnisonHT({});
 unisonht.use(new WebApi({ port }));
 
 unisonht.use(
-  new YamahaReceiver('receiver', {
-    address: '192.168.0.165',
-  }),
+    new YamahaReceiver('receiver', {
+        address: '192.168.0.165',
+    }),
 );
 
 async function start() {
-  await unisonht.start();
-  console.log(`Listening http://localhost:${port}`);
+    await unisonht.start();
+    console.log(`Listening http://localhost:${port}`);
 }
 
 start();
