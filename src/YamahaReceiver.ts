@@ -154,6 +154,7 @@ export class YamahaReceiver implements UnisonHTDevice {
     ): Promise<void> {
         const input = request.parameters.input;
         await this.client.changeInput(input);
+        response.send();
     }
 
     private async handleOn(
@@ -162,6 +163,7 @@ export class YamahaReceiver implements UnisonHTDevice {
         next: NextFunction,
     ): Promise<void> {
         await this.client.on();
+        response.send();
     }
 
     private async handleOff(
@@ -170,5 +172,6 @@ export class YamahaReceiver implements UnisonHTDevice {
         next: NextFunction,
     ): Promise<void> {
         await this.client.off();
+        response.send();
     }
 }
