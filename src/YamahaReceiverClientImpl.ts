@@ -2,15 +2,10 @@ import { YamahaReceiverClient } from './YamahaReceiverClient';
 import * as xpath from 'xpath';
 import * as xmldom from 'xmldom';
 import Debug from 'debug';
-import { ButtonNotFoundError } from '@unisonht/unisonht';
+import { ButtonNotFoundError, PowerStatus } from '@unisonht/unisonht';
 import axios from 'axios';
 import { YamahaReceiverButton } from './YamahaReceiverButton';
-import {
-    YamahaReceiverInput,
-    YamahaReceiverPower,
-    YamahaReceiverStatus,
-    YamahaReceiverZone,
-} from './YamahaReceiverStatus';
+import { YamahaReceiverInput, YamahaReceiverStatus, YamahaReceiverZone } from './YamahaReceiverStatus';
 
 const debug = Debug('YamahaReceiver:ClientImpl');
 
@@ -35,7 +30,7 @@ export class YamahaReceiverClientImpl implements YamahaReceiverClient {
 
     public async powerToggle(): Promise<void> {
         const status = await this.getStatus(YamahaReceiverZone.MAIN);
-        if (status.power === YamahaReceiverPower.ON) {
+        if (status.power === PowerStatus.ON) {
             await this.off();
         } else {
             await this.on();
@@ -108,7 +103,7 @@ export class YamahaReceiverClientImpl implements YamahaReceiverClient {
 
     public async getStatus(zone: YamahaReceiverZone): Promise<YamahaReceiverStatus> {
         const basicStatus = await this.getBasicStatus(zone);
-        const power = xpath.select(`//Power_Control/Power/text()`, basicStatus).toString() as YamahaReceiverPower;
+        const power = xpath.select(`//Power_Control/Power/text()`, basicStatus).toString().toLowerCase() as PowerStatus;
         const volume = parseInt(xpath.select(`//Volume/Lvl/Val/text()`, basicStatus).toString(), 10);
         const mute = xpath.select(`//Volume/Mute/text()`, basicStatus).toString() !== 'Off';
         const input = xpath.select(`//Input/Input_Sel/text()`, basicStatus).toString() as YamahaReceiverInput;

@@ -1,12 +1,8 @@
 import { YamahaReceiverClient } from './YamahaReceiverClient';
 import Debug from 'debug';
 import { YamahaReceiverButton } from './YamahaReceiverButton';
-import {
-    YamahaReceiverInput,
-    YamahaReceiverPower,
-    YamahaReceiverStatus,
-    YamahaReceiverZone,
-} from './YamahaReceiverStatus';
+import { YamahaReceiverInput, YamahaReceiverStatus, YamahaReceiverZone } from './YamahaReceiverStatus';
+import { PowerStatus } from '@unisonht/unisonht';
 
 const debug = Debug('YamahaReceiver:ClientMock');
 
@@ -36,7 +32,7 @@ export class YamahaReceiverClientMock implements YamahaReceiverClient {
             input: YamahaReceiverInput.HDMI1,
             mute: false,
             volume: -1,
-            power: YamahaReceiverPower.STANDBY,
+            power: PowerStatus.STANDBY,
         };
     }
 }

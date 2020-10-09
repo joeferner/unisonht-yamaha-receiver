@@ -1,3 +1,5 @@
+import { DeviceStatusWithPower, DeviceStatusWithVolume, DeviceStatusWithInput } from '@unisonht/unisonht';
+
 export enum YamahaReceiverZone {
     MAIN = 'Main_Zone',
 }
@@ -14,14 +16,6 @@ export enum YamahaReceiverInput {
     AV4 = 'AV4',
 }
 
-export enum YamahaReceiverPower {
-    STANDBY = 'Standby',
-    ON = 'On',
-}
-
-export interface YamahaReceiverStatus {
-    power: YamahaReceiverPower;
-    volume: number;
-    mute: boolean;
+export interface YamahaReceiverStatus extends DeviceStatusWithPower, DeviceStatusWithVolume, DeviceStatusWithInput {
     input: YamahaReceiverInput;
 }
