@@ -29,7 +29,7 @@
   },
   "homepage": "https://github.com/joeferner/unisonht-yamaha-receiver#readme",
   "dependencies": {
-    "axios": "0.20.x",
+    "axios": "0.21.x",
     "debug": "4.2.x",
     "xmldom": "0.x",
     "xpath": "0.0.x",
